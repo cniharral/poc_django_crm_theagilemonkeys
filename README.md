@@ -1,4 +1,4 @@
-# poc_django_crm_theagilemonkeys# Ref: https://davidcasr.medium.com/construir-un-api-rest-con-django-rest-framework-y-apiview-5ea4b2823307
+# poc_django_crm_theagilemonkeys
 
 Downloading the source code:
 
