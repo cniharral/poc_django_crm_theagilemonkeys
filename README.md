@@ -2,7 +2,7 @@
 
 Downloading the source code:
 
-% git clone https://github.com/cniharral/poc_django_crm_theagilemonkeys.git
+% git clone git@github.com:cniharral/poc_django_crm_theagilemonkeys.git
 
 Changing to the repository created:
 
