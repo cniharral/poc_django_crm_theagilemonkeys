@@ -1,5 +1,20 @@
 # Instructions to build your own REST API Django app
 
+Assumptions:
+
+1. You need a Linux system. In my case, this was built under Ubuntu 22 (Jammy). So, install it.
+2. Check if you have python version 3 installed in your system. If not, run:
+
+```
+% sudo apt install python3
+```
+
+3. Install also virtualenv tool, just to create python virtual environments where you can encapsulate all the libraries you will need without affecting the whole system:
+
+``` 
+% sudo apt install virtualenv
+``` 
+
 Downloading the source code:
 
 ```
