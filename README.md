@@ -1,4 +1,4 @@
-# poc_django_crm_theagilemonkeys
+# Instructions to build your own REST API Django app
 
 Downloading the source code:
 
