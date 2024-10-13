@@ -2,19 +2,27 @@
 
 Downloading the source code:
 
+'''
 % git clone git@github.com:cniharral/poc_django_crm_theagilemonkeys.git
+'''
 
 Changing to the repository created:
 
+'''
 % cd poc_django_crm_theagilemonkeys
+'''
 
 Creating the virtual environment to be used:
 
+'''
 % virtualenv venv
+'''
 
 Invoking the environment variables:
 
+'''
 % source init.sh
+'''
 
 Installing the requirements in the virtual environment:
 
