@@ -26,20 +26,28 @@ Invoking the environment variables:
 
 Installing the requirements in the virtual environment:
 
+```
 % $VENV/bin/pip install -r requirements.txt
+```
 
 Starting the project:
 
+```
 % cd $HOMEDIR; $VENV/bin/django-admin startproject poc_django_crm; cd -
 % cd $HOMEDIR/poc_django_crm
+```
 
 Starting the app:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py startapp app_django_crm
+```
 
 Creating the model:
 
+```
 % vi $HOMEDIR/poc_django_crm/app_django_crm/models.py
+
 ---
 from django.db import models
 from drf_extra_fields.fields import Base64ImageField
@@ -57,10 +65,13 @@ class Customer(models.Model):
     class Meta:
         ordering = ['name']
 ---
+```
 
 Modifying the settings of the project:
 
+```
 % vi $HOMEDIR/poc_django_crm/poc_django_crm/settings.py
+
 ---
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -123,14 +134,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
 ---
+```
 
 Starting the database:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py migrate
+```
 
 Creating the superuser of the admin site:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py createsuperuser
+
 ---
 Username (leave blank to use 'cnl'): poc
 Email address: poc@zynetyka.com
@@ -140,18 +156,25 @@ This password is too short. It must contain at least 8 characters.
 Bypass password validation and create user anyway? [y/N]: y
 Superuser created successfully.
 ---
+```
 
 Make all migrations to the database:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py makemigrations
+```
 
 Migrate the database:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py migrate
+```
 
 Modifying the admin registered models:
 
+```
 % vi $HOMEDIR/poc_django_crm/app_django_crm/admin.py
+
 ---
 from django.contrib import admin
 from .models import Customer
@@ -159,10 +182,13 @@ from .models import Customer
 # Register your models here.
 admin.site.register(Customer)
 ---
+```
 
 Creating the serializers:
 
+```
 % vi $HOMEDIR/poc_django_crm/app_django_crm/serializers.py
+
 ---
 from rest_framework import serializers
 from app_django_crm.models import Customer
@@ -172,10 +198,13 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         exclude = []
 ---
+```
 
 Creating the views to manage all REST API requests (GET, POST, PUT and DELETE):
 
+```
 % vi $HOMEDIR/poc_django_crm/app_django_crm/views.py
+
 ---
 from django.shortcuts import render
 
@@ -217,9 +246,11 @@ class Customer_APIView(APIView):
         customer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 ---
+```
 
 Declaring the urls to be used by any requests to the server:
 
+```
 % vi $HOMEDIR/poc_django_crm/poc_django_crm/urls.py
 ---
 from django.contrib import admin
@@ -235,15 +266,20 @@ urlpatterns = [
     path('v1/customer/<int:pk>/', Customer_APIView.as_view()),
 ]
 ---
+```
 
 Make any migrations to the database again to ensure all tables are up-to-date:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py makemigrations
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py migrate
+```
 
 Running the server:
 
+```
 % $VENV/bin/python $HOMEDIR/poc_django_crm/manage.py runserver
+```
 
 Creating a new token in the administration site:
 
@@ -253,12 +289,22 @@ Creating a new token in the administration site:
 
 Creating several users by invoking the server's REST API:
 
+```
 % curl -X POST http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token dd3087bb50f4f408f88af2e2f1a106da9b674825" -d "name=test1&surname=test2&last_creation_userid=1&last_update_userid=1"
 {"id":1,"name":"test1","surname":"test1","photo":null,"last_creation_userid":1,"last_update_userid":1}
+```
+
+```
 % curl -X POST http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -d "name=test2&surname=test2&last_creation_userid=1&last_update_userid=1"
 {"id":2,"name":"test2","surname":"test2","photo":null,"last_creation_userid":1,"last_update_userid":1}
+```
+
+```
 % curl -X POST http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -d "name=test3&surname=test3&last_creation_userid=1&last_update_userid=1"
 {"id":3,"name":"test3","surname":"test3","photo":null,"last_creation_userid":1,"last_update_userid":1}
+```
+
+```
 % curl -X GET http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" 2>/dev/null | jq[
   {
     "id": 1,
@@ -285,7 +331,13 @@ Creating several users by invoking the server's REST API:
     "last_update_userid": 1
   }
 ]
+```
+
+```
 % curl -X DELETE http://127.0.0.1:8000/v1/customer/1/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c"
+```
+
+```
 % curl -X GET http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" 2>/dev/null | jq
 [
   {
@@ -305,8 +357,14 @@ Creating several users by invoking the server's REST API:
     "last_update_userid": 1
   }
 ]
+```
+
+```
 % curl -X PUT http://127.0.0.1:8000/v1/customer/2/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -d "name=test22&surname=test22&last_creation_userid=1&last_update_userid=1"
 {"id":2,"name":"test22","surname":"test22","photo":null,"last_creation_userid":1,"last_update_userid":1}
+```
+
+```
 % curl -X GET http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" 2>/dev/null | jq[
   {
     "id": 2,
@@ -325,4 +383,5 @@ Creating several users by invoking the server's REST API:
     "last_update_userid": 1
   }
 ]
+```
 
