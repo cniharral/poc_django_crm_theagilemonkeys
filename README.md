@@ -1,5 +1,7 @@
 # Instructions to build your own REST API Django app
 
+## Requirements
+
 Assumptions:
 
 1. You need a Linux system. In my case, this was built under Ubuntu 22 (Jammy). So, install it.
@@ -14,6 +16,8 @@ Assumptions:
 ``` 
 % sudo apt install virtualenv
 ``` 
+
+## Installing the application
 
 Downloading the source code:
 
@@ -302,6 +306,8 @@ Creating a new token in the administration site:
 - Create a new token.
 - It will be used furtherly in any requests made to the server.
 
+## Working with the application
+
 Creating several users by invoking the server's REST API:
 
 ```
@@ -318,6 +324,8 @@ Creating several users by invoking the server's REST API:
 % curl -X POST http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -d "name=test3&surname=test3&last_creation_userid=1&last_update_userid=1"
 {"id":3,"name":"test3","surname":"test3","photo":null,"last_creation_userid":1,"last_update_userid":1}
 ```
+
+Checking if they are in the system:
 
 ```
 % curl -X GET http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" 2>/dev/null | jq[
@@ -348,6 +356,8 @@ Creating several users by invoking the server's REST API:
 ]
 ```
 
+Deleting customers in the system:
+
 ```
 % curl -X DELETE http://127.0.0.1:8000/v1/customer/1/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c"
 ```
@@ -373,6 +383,8 @@ Creating several users by invoking the server's REST API:
   }
 ]
 ```
+
+Modifying customers in the system:
 
 ```
 % curl -X PUT http://127.0.0.1:8000/v1/customer/2/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -d "name=test22&surname=test22&last_creation_userid=1&last_update_userid=1"
