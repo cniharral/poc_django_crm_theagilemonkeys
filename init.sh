@@ -1,4 +1,2 @@
-path=$PWD/$0
-HOMEDIR="${path%\/*}/"
-export HOMEDIR=/home/cnl/CV/TheAgileMonkeys/poc_django_crm_theagilemonkeys
+HOMEDIR=$(cd $(dirname $BASH_SOURCE) && pwd)
 export VENV=$HOMEDIR/venv
