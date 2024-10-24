@@ -413,6 +413,6 @@ Modifying customers in the system:
 ```
 
 ```
-curl -X POST http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -F "name=test17" -F "surname=test17" -F "last_creation_userid=1" -F "last_update_userid=1" -F "photo=@/home/cnl/Dropbox/foto_cnl_1.jpg"
+% curl -X POST http://127.0.0.1:8000/v1/customer/ -H "Authorization: Token 0317616da6ea3d95db972373e6fd67aa9813156c" -F "name=test17" -F "surname=test17" -F "last_creation_userid=1" -F "last_update_userid=1" -F "photo=@/home/cnl/Dropbox/foto_cnl_1.jpg"
 {"id":18,"name":"test17","surname":"test17","photo":"/media/images/foto_cnl_1_qRNurHJ.jpg","last_creation_userid":1,"last_update_userid":1}
 ```
